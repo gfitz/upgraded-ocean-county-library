@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/home_banner"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@raw/sailboat"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/ocean_county_library"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/white"
+            android:typeface="serif"
+            android:textSize="25sp"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/home_banner"
+        android:orientation="vertical">
+
+        <com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton
+            android:id="@+id/search_the_catalog_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_home_button_separator"/>
+
+        <com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton
+            android:id="@+id/my_account_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_home_button_separator"/>
+
+        <com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton
+            android:id="@+id/library_locator_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"/>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ocean-county-library</string>
+    <string name="ocean_county_library">Ocean County Library</string>
+    <string name="search_the_catalog">Search the Catalog</string>
+    <string name="my_account">My Account</string>
+    <string name="library_locator">Library Locator</string>
+</resources>
