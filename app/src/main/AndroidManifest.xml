@@ -18,7 +18,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".modules.library_website.LibraryWebsiteActivity"/>
+        <activity android:name=".modules.library_website.LibraryWebsiteActivity"
+            android:parentActivityName=".modules.home.HomeActivity"/>
     </application>
 
 </manifest>

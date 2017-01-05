@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -18,7 +20,8 @@ import com.sunlightsoftware.android.ocean_county_library.R;
 /**
  * Created by Garrett on 1/5/2017.
  *
- * This fragment will be displayed when
+ * This fragment will be displayed when the Search the Catalog Button or My Account Button is
+ * pressed.
  */
 
 public class LibraryWebsiteFragment extends Fragment {
@@ -53,7 +56,7 @@ public class LibraryWebsiteFragment extends Fragment {
                     mProgressBar.setVisibility(View.GONE);
                 else {
                     mProgressBar.setVisibility(View.VISIBLE);
-                    mProgressBar.setVisibility(newProgress);
+                    mProgressBar.setProgress(newProgress);
                 }
             }
 
@@ -64,8 +67,32 @@ public class LibraryWebsiteFragment extends Fragment {
             }
         });
 
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return false;
+            }
+        });
+
+        mWebView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+
+                if (keyEvent.getAction() == KeyEvent.ACTION_DOWN
+                        && i == KeyEvent.KEYCODE_BACK
+                        && mWebView.canGoBack()) {
+
+                    mWebView.goBack();
+                    return true;
+                }
+
+                return false;
+            }
+        });
 
         mWebView.loadUrl(getArguments().getParcelable(WEBSITE_KEY).toString());
         return view;
     }
+
+
 }
