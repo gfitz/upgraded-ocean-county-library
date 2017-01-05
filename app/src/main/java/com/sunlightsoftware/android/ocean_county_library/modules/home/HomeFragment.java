@@ -1,5 +1,6 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,14 @@ import android.view.ViewGroup;
 
 import com.sunlightsoftware.android.ocean_county_library.R;
 import com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton;
+import com.sunlightsoftware.android.ocean_county_library.modules.library_website.LibraryWebsiteActivity;
 
 /**
  * Created by Garrett on 1/4/2017.
  */
 
 public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
     private HomeButton mMyAccountButton;
     private HomeButton mLibraryLocatorButton;
     private HomeButton mSearchTheCatalogButton;
@@ -31,6 +34,13 @@ public class HomeFragment extends Fragment {
         mSearchTheCatalogButton = (HomeButton) v.findViewById(R.id.search_the_catalog_button);
         mSearchTheCatalogButton.setImageResource(R.drawable.searchthecatalog);
         mSearchTheCatalogButton.setText(R.string.search_the_catalog);
+        mSearchTheCatalogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = LibraryWebsiteActivity.newIntent(getActivity());
+                startActivity(i);
+            }
+        });
 
         mMyAccountButton = (HomeButton) v.findViewById(R.id.my_account_button);
         mMyAccountButton.setImageResource(R.drawable.my_account);

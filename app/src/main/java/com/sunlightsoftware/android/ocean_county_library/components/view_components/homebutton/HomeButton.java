@@ -2,8 +2,11 @@ package com.sunlightsoftware.android.ocean_county_library.components.view_compon
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sunlightsoftware.android.ocean_county_library.R;
@@ -12,10 +15,11 @@ import com.sunlightsoftware.android.ocean_county_library.R;
  * Created by Garrett on 1/4/2017.
  */
 
-public class HomeButton extends LinearLayout {
+public class HomeButton extends RelativeLayout {
 
     private ImageView mHomeButtonIcon;
     private TextView mHomeButtonDescription;
+    private Button mButton;
 
     public HomeButton(Context context) {
         super(context);
@@ -37,6 +41,7 @@ public class HomeButton extends LinearLayout {
 
         mHomeButtonIcon = (ImageView) findViewById(R.id.home_button_icon);
         mHomeButtonDescription = (TextView) findViewById(R.id.home_button_description);
+        mButton = (Button) findViewById(R.id.home_button);
     }
 
     public void setText(int stringResourceId) {
@@ -47,4 +52,8 @@ public class HomeButton extends LinearLayout {
         mHomeButtonIcon.setImageResource(imageResource);
     }
 
+    @Override
+    public void setOnClickListener(OnClickListener l) {
+       mButton.setOnClickListener(l);
+    }
 }
