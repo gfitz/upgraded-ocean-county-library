@@ -9,6 +9,7 @@
         android:visibility="gone"
         style="?android:attr/progressBarStyleHorizontal"
         android:background="?attr/colorPrimary"/>
+
     <WebView
         android:id="@+id/fragment_library_website_web_view"
         android:layout_width="match_parent"

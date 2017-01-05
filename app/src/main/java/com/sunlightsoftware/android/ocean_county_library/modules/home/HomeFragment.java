@@ -1,13 +1,16 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sunlightsoftware.android.ocean_county_library.Constant;
 import com.sunlightsoftware.android.ocean_county_library.R;
 import com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton;
 import com.sunlightsoftware.android.ocean_county_library.modules.library_website.LibraryWebsiteActivity;
@@ -26,6 +29,13 @@ public class HomeFragment extends Fragment {
         return new HomeFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().hide();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,7 +47,8 @@ public class HomeFragment extends Fragment {
         mSearchTheCatalogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = LibraryWebsiteActivity.newIntent(getActivity());
+                Intent i = LibraryWebsiteActivity.newIntent(getActivity(),
+                        Constant.searchTheCatalogURL);
                 startActivity(i);
             }
         });
@@ -45,6 +56,14 @@ public class HomeFragment extends Fragment {
         mMyAccountButton = (HomeButton) v.findViewById(R.id.my_account_button);
         mMyAccountButton.setImageResource(R.drawable.my_account);
         mMyAccountButton.setText(R.string.my_account);
+        mMyAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = LibraryWebsiteActivity.newIntent(getActivity(),
+                        Constant.myAccountURL);
+                startActivity(i);
+            }
+        });
 
         mLibraryLocatorButton = (HomeButton) v.findViewById(R.id.library_locator_button);
         mLibraryLocatorButton.setImageResource(R.drawable.library_locator);
