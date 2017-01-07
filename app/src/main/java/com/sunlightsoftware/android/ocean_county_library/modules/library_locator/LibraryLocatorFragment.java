@@ -61,7 +61,7 @@ public class LibraryLocatorFragment extends Fragment {
 
         public void bindLibrary(Library library) {
             mNameTextView.setText(library.getName());
-            mLibraryImageView.setImageBitmap(ImageUtils.getBitmapFromAssetPath(getContext().getAssets(), library.getAssetPath()));
+            mLibraryImageView.setImageBitmap(ImageUtils.getBitmapFromAssetPath(getContext().getAssets(), library.getAssetPath(), getActivity()));
         }
 
     }

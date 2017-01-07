@@ -17,18 +17,18 @@ import java.io.InputStream;
  */
 
 public class ImageUtils {
-    public static Bitmap getBitmapFromAssetPath(AssetManager assetManager, String assetPath) {
+    public static Bitmap getBitmapFromAssetPath(AssetManager assetManager, String assetPath, Activity activity) {
         InputStream inputStream = null;
         Bitmap bitmap = null;
 
         try {
             inputStream = assetManager.open(assetPath);
-            bitmap = BitmapFactory.decodeStream(inputStream);
+          //  bitmap = BitmapFactory.decodeStream(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return bitmap;
+        return getScaledBitmap(inputStream, 100, 100);
     }
 
     public static Bitmap getScaledBitmap(InputStream inputStream, Activity activity) {
