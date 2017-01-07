@@ -42,7 +42,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/color_home_button_separator"/>
+            android:background="@color/color_separator"/>
 
         <com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton
             android:id="@+id/my_account_button"
@@ -53,7 +53,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/color_home_button_separator"/>
+            android:background="@color/color_separator"/>
 
         <com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton
             android:id="@+id/library_locator_button"

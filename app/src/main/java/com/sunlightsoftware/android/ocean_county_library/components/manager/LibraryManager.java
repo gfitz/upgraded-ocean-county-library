@@ -8,6 +8,7 @@ import com.sunlightsoftware.android.ocean_county_library.models.Library;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,14 +33,21 @@ public class LibraryManager {
         try {
             libraryPhotoNames = mAssetManager.list(LIBRARY_FOLDER);
             Log.i(TAG, "Found " + libraryPhotoNames.length + " library photo names");
+            Log.i(TAG, "Found photo names: " + Arrays.toString(libraryPhotoNames));
         } catch (IOException e) {
             Log.e(TAG, "Could not load library photo names.", e);
             return;
         }
 
         for (String filename : libraryPhotoNames) {
+            String libraryName = "";
+            String nameComponents[] = filename.split("_");
+
+            for (String nameCoponent: nameComponents) {
+                libraryName +=  (nameCoponent + " ");
+            }
             String assetPath = LIBRARY_FOLDER + "/" + filename;
-            Library library = new Library("Berkley Branch", assetPath);
+            Library library = new Library(libraryName, assetPath);
             mLibraries.add(library);
         }
     }
