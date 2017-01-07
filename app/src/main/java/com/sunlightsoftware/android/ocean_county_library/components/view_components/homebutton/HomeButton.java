@@ -1,6 +1,7 @@
 package com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,8 @@ public class HomeButton extends RelativeLayout {
 
         mHomeButtonIcon = (ImageView) findViewById(R.id.home_button_icon);
         mHomeButtonDescription = (TextView) findViewById(R.id.home_button_description);
+        mHomeButtonDescription.setTypeface(Typeface
+                .createFromAsset(getContext().getAssets(), "fonts/Montserrat-Regular.ttf"));
         mButton = (Button) findViewById(R.id.home_button);
     }
 

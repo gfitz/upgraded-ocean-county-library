@@ -1,5 +1,6 @@
 package com.sunlightsoftware.android.ocean_county_library;
 
+import android.graphics.Typeface;
 import android.net.Uri;
 
 /**
@@ -7,8 +8,12 @@ import android.net.Uri;
  */
 
 public class Constant {
+
+    //Library URLS
     public static final Uri searchTheCatalogURL = Uri
             .parse("https://pac.theoceancountylibrary.org/Mobile/Search/Advanced");
     public static final Uri myAccountURL = Uri
             .parse("https://pac.theoceancountylibrary.org/Mobile/MyAccount/Logon");
+
+
 }
