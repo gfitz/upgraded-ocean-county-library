@@ -14,9 +14,4 @@ public class HomeActivity extends SingleFragmentActivity {
         return HomeFragment.newInstance();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fragment);
-    }
 }

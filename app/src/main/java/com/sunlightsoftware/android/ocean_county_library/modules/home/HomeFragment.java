@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.sunlightsoftware.android.ocean_county_library.Constant;
 import com.sunlightsoftware.android.ocean_county_library.R;
 import com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton;
+import com.sunlightsoftware.android.ocean_county_library.modules.library_locator.LibraryLocatorActivity;
 import com.sunlightsoftware.android.ocean_county_library.modules.library_website.LibraryWebsiteActivity;
 
 /**
@@ -74,6 +75,13 @@ public class HomeFragment extends Fragment {
         mLibraryLocatorButton = (HomeButton) v.findViewById(R.id.library_locator_button);
         mLibraryLocatorButton.setImageResource(R.drawable.library_locator);
         mLibraryLocatorButton.setText(R.string.library_locator);
+        mLibraryLocatorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = LibraryLocatorActivity.newIntent(getActivity());
+                startActivity(i);
+            }
+        });
 
         return v;
     }

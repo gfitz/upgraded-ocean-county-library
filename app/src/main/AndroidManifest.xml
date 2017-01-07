@@ -20,6 +20,9 @@
 
         <activity android:name=".modules.library_website.LibraryWebsiteActivity"
             android:parentActivityName=".modules.home.HomeActivity"/>
+
+        <activity android:name=".modules.library_locator.LibraryLocatorActivity"/>
+
     </application>
 
 </manifest>
