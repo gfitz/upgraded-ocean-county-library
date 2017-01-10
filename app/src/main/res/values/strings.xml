@@ -5,4 +5,7 @@
     <string name="my_account">My Account</string>
     <string name="library_locator">Library Locator</string>
     <string name="select_your_library">Select Your Library</string>
+    <string name="call">Call</string>
+    <string name="directions">Directions</string>
+    <string name="hours_of_operation">Hours of Operation:</string>
 </resources>
