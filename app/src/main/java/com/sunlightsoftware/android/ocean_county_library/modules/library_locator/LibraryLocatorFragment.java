@@ -1,5 +1,8 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_locator;
 
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +17,8 @@ import android.widget.TextView;
 
 import com.sunlightsoftware.android.ocean_county_library.R;
 import com.sunlightsoftware.android.ocean_county_library.components.manager.*;
+import com.sunlightsoftware.android.ocean_county_library.components.utils.AsyncDrawable;
+import com.sunlightsoftware.android.ocean_county_library.components.utils.BitmapWorkerTask;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.ImageUtils;
 import com.sunlightsoftware.android.ocean_county_library.models.Library;
 
@@ -59,10 +64,44 @@ public class LibraryLocatorFragment extends Fragment {
             mNameTextView = (TextView) itemView.findViewById(R.id.library_list_item_text_view);
         }
 
-        public void bindLibrary(Library library) {
+        public void bindLibrary(final Library library) {
             mNameTextView.setText(library.getName());
-            mLibraryImageView.setImageBitmap(ImageUtils.getBitmapFromAssetPath(getContext().getAssets(), library.getAssetPath(), getActivity()));
+            loadBitmap(library.getAssetPath(), mLibraryImageView);
         }
+
+        private void loadBitmap(String assetPath, ImageView imageView) {
+            if (cancelPotentialWork(assetPath, imageView)) {
+                Point size = new Point();
+                getActivity().getWindowManager().getDefaultDisplay().getSize(size);
+
+                BitmapWorkerTask bitmapWorkerTask = new BitmapWorkerTask(imageView,
+                        getContext().getAssets(),
+                        size.x,
+                        size.y);
+                final AsyncDrawable asyncDrawable = new AsyncDrawable(bitmapWorkerTask);
+                imageView.setImageDrawable(asyncDrawable);
+
+                bitmapWorkerTask.execute(assetPath);
+            }
+
+        }
+
+        private  boolean cancelPotentialWork(String assetPath, ImageView imageView) {
+            final BitmapWorkerTask bitmapWorkerTask = ImageUtils.getBitmapWorkerTask(imageView);
+
+            if (bitmapWorkerTask != null) {
+                final String bitmapAssetPath = bitmapWorkerTask.assetPath;
+
+                if (bitmapAssetPath == null || !bitmapAssetPath.equals(assetPath)) {
+                    bitmapWorkerTask.cancel(true);
+                } else {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
 
     }
 
