@@ -1,8 +1,10 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_locator;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,7 @@ import com.sunlightsoftware.android.ocean_county_library.components.utils.ImageU
 import com.sunlightsoftware.android.ocean_county_library.models.Library;
 import com.sunlightsoftware.android.ocean_county_library.modules.library_info.LibraryInfoActivity;
 
+import java.io.FileOutputStream;
 import java.util.List;
 
 /**
@@ -62,6 +65,7 @@ public class LibraryLocatorFragment extends Fragment {
 
         private ImageView mLibraryImageView;
         private TextView mNameTextView;
+        private Library mLibrary;
 
         public LibraryHolder(LayoutInflater inflater, ViewGroup container) {
             super(inflater.inflate(R.layout.library_list_item, container, false));
@@ -77,8 +81,9 @@ public class LibraryLocatorFragment extends Fragment {
         }
 
         public void bindLibrary(final Library library) {
-            mNameTextView.setText(library.getName());
-            loadBitmap(library.getAssetPath(), mLibraryImageView);
+            mLibrary = library;
+            mNameTextView.setText(mLibrary.getName());
+            loadBitmap(mLibrary.getAssetPath(), mLibraryImageView);
         }
 
         private void loadBitmap(String assetPath, ImageView imageView) {
@@ -118,7 +123,10 @@ public class LibraryLocatorFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Log.i(TAG, "itemView clicked");
-            Intent i = LibraryInfoActivity.newIntent(getContext());
+
+
+            Intent i = LibraryInfoActivity.newIntent(getContext(), mLibrary.getAssetPath(),
+                    mLibrary.getName());
             startActivity(i);
         }
     }
