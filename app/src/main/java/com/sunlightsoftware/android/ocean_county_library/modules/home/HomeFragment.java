@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         mBannerTextView = (TextView) v.findViewById(R.id.home_banner_text_view);
-        mBannerTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), "fonts/Montserrat-Regular.ttf"));
+        mBannerTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), Constant.MONTSERRAT_FONT));
 
         mSearchTheCatalogButton = (HomeButton) v.findViewById(R.id.search_the_catalog_button);
         mSearchTheCatalogButton.setImageResource(R.drawable.searchthecatalog);

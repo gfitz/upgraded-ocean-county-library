@@ -15,5 +15,8 @@ public class Constant {
     public static final Uri myAccountURL = Uri
             .parse("https://pac.theoceancountylibrary.org/Mobile/MyAccount/Logon");
 
+    //Typeface
+    public static final String MONTSERRAT_FONT = "fonts/Montserrat-Regular.ttf";
+
 
 }

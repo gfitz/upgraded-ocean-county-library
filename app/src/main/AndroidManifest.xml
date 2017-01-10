@@ -21,7 +21,8 @@
         <activity android:name=".modules.library_website.LibraryWebsiteActivity"
             android:parentActivityName=".modules.home.HomeActivity"/>
 
-        <activity android:name=".modules.library_locator.LibraryLocatorActivity"/>
+        <activity android:name=".modules.library_locator.LibraryLocatorActivity"
+            android:parentActivityName=".modules.home.HomeActivity"/>
 
     </application>
 

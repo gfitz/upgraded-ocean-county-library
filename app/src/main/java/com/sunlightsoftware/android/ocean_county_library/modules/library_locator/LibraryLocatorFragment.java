@@ -1,9 +1,11 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_locator;
 
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sunlightsoftware.android.ocean_county_library.Constant;
 import com.sunlightsoftware.android.ocean_county_library.R;
 import com.sunlightsoftware.android.ocean_county_library.components.manager.LibraryManager;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.AsyncDrawable;
@@ -35,6 +38,8 @@ public class LibraryLocatorFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mLibraryManager = new LibraryManager(getActivity());
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().setTitle(getString(R.string.select_your_library));
 
     }
 
@@ -57,8 +62,12 @@ public class LibraryLocatorFragment extends Fragment {
         public LibraryHolder(LayoutInflater inflater, ViewGroup container) {
             super(inflater.inflate(R.layout.library_list_item, container, false));
 
-            mLibraryImageView = (ImageView) itemView.findViewById(R.id.library_list_item_image_view);
+            mLibraryImageView = (ImageView) itemView
+                    .findViewById(R.id.library_list_item_image_view);
+
             mNameTextView = (TextView) itemView.findViewById(R.id.library_list_item_text_view);
+            mNameTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),
+                    Constant.MONTSERRAT_FONT));
         }
 
         public void bindLibrary(final Library library) {

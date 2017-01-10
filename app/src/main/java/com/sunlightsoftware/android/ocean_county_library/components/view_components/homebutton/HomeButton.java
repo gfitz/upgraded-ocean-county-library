@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.sunlightsoftware.android.ocean_county_library.Constant;
 import com.sunlightsoftware.android.ocean_county_library.R;
 
 /**
@@ -43,7 +44,7 @@ public class HomeButton extends RelativeLayout {
         mHomeButtonIcon = (ImageView) findViewById(R.id.home_button_icon);
         mHomeButtonDescription = (TextView) findViewById(R.id.home_button_description);
         mHomeButtonDescription.setTypeface(Typeface
-                .createFromAsset(getContext().getAssets(), "fonts/Montserrat-Regular.ttf"));
+                .createFromAsset(getContext().getAssets(), Constant.MONTSERRAT_FONT));
         mButton = (Button) findViewById(R.id.home_button);
     }
 
