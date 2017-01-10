@@ -1,8 +1,6 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_locator;
 
-import android.graphics.Bitmap;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,12 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunlightsoftware.android.ocean_county_library.R;
-import com.sunlightsoftware.android.ocean_county_library.components.manager.*;
+import com.sunlightsoftware.android.ocean_county_library.components.manager.LibraryManager;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.AsyncDrawable;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.BitmapWorkerTask;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.ImageUtils;

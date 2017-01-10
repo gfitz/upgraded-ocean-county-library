@@ -43,9 +43,11 @@ public class LibraryManager {
             String libraryName = "";
             String nameComponents[] = filename.split("_");
 
-            for (String nameCoponent: nameComponents) {
-                libraryName +=  (nameCoponent + " ");
+            for (String nameComponent: nameComponents) {
+
+                libraryName +=  Character.toUpperCase(nameComponent.charAt(0)) + nameComponent.substring(1) + " ";
             }
+            libraryName = libraryName.replace(".png", "");
             String assetPath = LIBRARY_FOLDER + "/" + filename;
             Library library = new Library(libraryName, assetPath);
             mLibraries.add(library);

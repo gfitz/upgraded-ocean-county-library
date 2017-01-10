@@ -1,7 +1,5 @@
 package com.sunlightsoftware.android.ocean_county_library.components.utils;
 
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 import java.lang.ref.WeakReference;
@@ -13,7 +11,6 @@ import java.lang.ref.WeakReference;
 public class AsyncDrawable extends BitmapDrawable{
     private final WeakReference<BitmapWorkerTask> mBitmapWorkerTaskWeakReference;
 
-    //MAY NEED TO CHANGE FROMR ESOURCES TO ASSRT MANAGER
     public AsyncDrawable(BitmapWorkerTask bitmapWorkerTask) {
         mBitmapWorkerTaskWeakReference = new WeakReference<BitmapWorkerTask>(bitmapWorkerTask);
     }
