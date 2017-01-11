@@ -5,45 +5,37 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/library_info_image_view"
         android:layout_width="match_parent"
-        android:layout_height="225dp">
-
-        <ImageView
-            android:id="@+id/library_info_image_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            tools:src="@raw/sailboat"/>
-
-        <TextView
-            android:id="@+id/library_info_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            tools:text="Toms River Branch"/>
-    </RelativeLayout>
+        android:layout_height="225dp"
+        android:scaleType="fitXY"
+        tools:src="@raw/sailboat"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
             android:layout_weight="2">
 
             <TextView
+                android:id="@+id/library_info_call_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="@string/call"
-                android:textSize="18sp"/>
+                android:textSize="22sp"
+                android:drawablePadding="8dp"
+                android:drawableLeft="@drawable/phone"
+                android:drawableStart="@drawable/phone"/>
 
-        </FrameLayout>
+        </LinearLayout>
 
         <View
             android:layout_width="1dp"
@@ -52,20 +44,27 @@
             android:layout_marginTop="9dp"
             android:background="@color/color_separator"/>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
             android:layout_weight="2">
 
             <TextView
-                android:id="@+id/library_info_direction_text_view"
+                android:id="@+id/library_info_directions_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:gravity="center"
                 android:text="@string/directions"
-                android:textSize="18sp"/>
+                android:textSize="22sp"
+                android:drawablePadding="8dp"
+                android:drawableLeft="@drawable/sign"
+                android:drawableStart="@drawable/sign"/>
 
-        </FrameLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -87,6 +86,7 @@
         android:textStyle="bold"/>
 
     <TextView
+        android:id="@+id/sunday_hours_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -95,6 +95,7 @@
         tools:text="Sunday: Closed"/>
 
     <TextView
+        android:id="@+id/monday_hours_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -103,6 +104,7 @@
         tools:text="Sunday: Closed"/>
 
     <TextView
+        android:id="@+id/tuesday_hours_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -111,6 +113,7 @@
         tools:text="Sunday: Closed"/>
 
     <TextView
+        android:id="@+id/wednesday_hours_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -119,6 +122,7 @@
         tools:text="Sunday: Closed"/>
 
     <TextView
+        android:id="@+id/thursday_hours_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -127,6 +131,7 @@
         tools:text="Sunday: Closed"/>
 
     <TextView
+        android:id="@+id/friday_hours_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -135,14 +140,13 @@
         tools:text="Sunday: Closed"/>
 
     <TextView
+        android:id="@+id/saturday_hours_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="4dp"
         android:textSize="18sp"
         tools:text="Sunday: Closed"/>
-
-
 
 
 </LinearLayout>
