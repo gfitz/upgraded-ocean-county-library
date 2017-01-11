@@ -1,10 +1,14 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_info;
 
+import android.graphics.Point;
 import android.graphics.Typeface;
+import android.icu.text.LocaleDisplayNames;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +18,11 @@ import android.widget.TextView;
 
 import com.sunlightsoftware.android.ocean_county_library.Constant;
 import com.sunlightsoftware.android.ocean_county_library.R;
+import com.sunlightsoftware.android.ocean_county_library.components.utils.AsyncDrawable;
+import com.sunlightsoftware.android.ocean_county_library.components.utils.BitmapWorkerTask;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.ImageUtils;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Garrett on 1/10/2017.
@@ -62,15 +70,28 @@ public class LibraryInfoFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_library_info, container, false);
 
         mLibraryImageView = (ImageView) v.findViewById(R.id.library_info_image_view);
-        mLibraryImageView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                mLibraryImageView.setImageBitmap(ImageUtils
-                        .decodeSampledBitmapFromAssets(getContext().getAssets(),
-                        getArguments().getString(ARG_PHOTO_ASSET_PATH),
-                                mLibraryImageView.getWidth(), mLibraryImageView.getHeight()));
-            }
-        });
+
+        //Publish bitmap to imageview. Should really look into how to just pass a reference of
+        //previous bitmap
+        // into this fragment
+        Point size = new Point();
+        getActivity().getWindowManager().getDefaultDisplay().getSize(size);
+
+        Log.d(TAG, "Size x: " + size.x);
+
+        // I know this is a bit hacky and could use some redesign. For some reason one of my
+        // assets does not load with the regular size.x value. It;s only one image which is frustrating
+
+        BitmapWorkerTask bitmapWorkerTask =
+                new BitmapWorkerTask(mLibraryImageView, getContext().getAssets(), size.x / 2, 225);
+        try {
+            mLibraryImageView.setImageBitmap(bitmapWorkerTask
+                    .execute(getArguments().getString(ARG_PHOTO_ASSET_PATH)).get());
+        } catch (InterruptedException e) {
+            Log.e(TAG, "InterruptedException", e);
+        } catch (ExecutionException e) {
+            Log.e(TAG, "ExecutionException", e);
+        }
 
         mCallTextView = (TextView) v.findViewById(R.id.library_info_call_text_view);
         mCallTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
