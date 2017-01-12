@@ -21,7 +21,11 @@ import com.sunlightsoftware.android.ocean_county_library.R;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.AsyncDrawable;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.BitmapWorkerTask;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.ImageUtils;
+import com.sunlightsoftware.android.ocean_county_library.models.Library;
+import com.sunlightsoftware.android.ocean_county_library.provider.Day;
+import com.sunlightsoftware.android.ocean_county_library.provider.LibraryProvider;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -80,7 +84,8 @@ public class LibraryInfoFragment extends Fragment {
         Log.d(TAG, "Size x: " + size.x);
 
         // I know this is a bit hacky and could use some redesign. For some reason one of my
-        // assets does not load with the regular size.x value. It;s only one image which is frustrating
+        // assets does not load with the regular size.x value. It;s only one image which is
+        // frustrating
 
         BitmapWorkerTask bitmapWorkerTask =
                 new BitmapWorkerTask(mLibraryImageView, getContext().getAssets(), size.x / 2, 225);
@@ -102,33 +107,61 @@ public class LibraryInfoFragment extends Fragment {
                 Constant.MONTSERRAT_FONT));
 
         mSundayHoursTextView = (TextView) v.findViewById(R.id.sunday_hours_text_view);
-        mSundayHoursTextView.setText(getString(R.string.sunday_hours, Integer.toString(9),
-                Integer.toString(9)));
 
         mMondayHoursTextView = (TextView) v.findViewById(R.id.monday_hours_text_view);
-        mMondayHoursTextView.setText(getString(R.string.monday_hours, Integer.toString(9),
-                Integer.toString(9)));
 
         mTuesdayHoursTextView = (TextView) v.findViewById(R.id.tuesday_hours_text_view);
-        mTuesdayHoursTextView.setText(getString(R.string.tuesday_hours, Integer.toString(9),
-                Integer.toString(9)));
 
         mWednesdayHoursTextView = (TextView) v.findViewById(R.id.wednesday_hours_text_view);
-        mWednesdayHoursTextView.setText(getString(R.string.wednesday_hours, Integer.toString(9),
-                Integer.toString(9)));
 
         mThursdayHoursTextView = (TextView) v.findViewById(R.id.thursday_hours_text_view);
-        mThursdayHoursTextView.setText(getString(R.string.thursday_hours, Integer.toString(9),
-                Integer.toString(9)));
 
         mFridayHoursTextView = (TextView) v.findViewById(R.id.friday_hours_text_view);
-        mFridayHoursTextView.setText(getString(R.string.friday_hours, Integer.toString(9),
-                Integer.toString(9)));
 
         mSaturdayTextView = (TextView) v.findViewById(R.id.saturday_hours_text_view);
-        mSaturdayTextView.setText(getString(R.string.saturday_hours, Integer.toString(9),
-                Integer.toString(9)));
+
+        String branchName = getArguments().getString(ARG_LIBRARY_NAME).toUpperCase();
+        branchName = branchName.replace(" ", "_");
+        branchName = branchName.substring(0, branchName.length() - 1);
+
+        setHoursTextViews(LibraryProvider.valueOf(branchName));
 
         return v;
+    }
+
+    private void setHoursTextViews(LibraryProvider library) {
+
+        //Check if closed on Sunday
+        String sundayOpeningHour = library.getOpeningHourString(Day.SUNDAY);
+
+        if (sundayOpeningHour.equals("Closed")) {
+            mSundayHoursTextView.setText(getString(R.string.closed_on_this_day,
+                    getString(R.string.sunday)));
+        } else {
+            mSundayHoursTextView.setText(getString(R.string.sunday_hours,
+                    library.getOpeningHourString(Day.SUNDAY),
+                    library.getClosingHourString(Day.SUNDAY)));
+        }
+
+        //FOR EACH DAY IN DAYS, setDayTextView()!
+
+        mMondayHoursTextView.setText(getString(R.string.monday_hours,
+                library.getOpeningHourString(Day.MONDAY),
+                library.getClosingHourString(Day.MONDAY)));
+        mTuesdayHoursTextView.setText(getString(R.string.tuesday_hours,
+                library.getOpeningHourString(Day.TUESDAY),
+                library.getClosingHourString(Day.TUESDAY)));
+        mWednesdayHoursTextView.setText(getString(R.string.wednesday_hours,
+                library.getOpeningHourString(Day.WEDNESDAY),
+                library.getClosingHourString(Day.WEDNESDAY)));
+        mThursdayHoursTextView.setText(getString(R.string.thursday_hours,
+                library.getOpeningHourString(Day.THURSDAY),
+                library.getClosingHourString(Day.THURSDAY)));
+        mFridayHoursTextView.setText(getString(R.string.friday_hours,
+                library.getOpeningHourString(Day.FRIDAY),
+                library.getClosingHourString(Day.FRIDAY)));
+        mSaturdayTextView.setText(getString(R.string.saturday_hours,
+                library.getOpeningHourString(Day.SATURDAY),
+                library.getClosingHourString(Day.SATURDAY)));
     }
 }

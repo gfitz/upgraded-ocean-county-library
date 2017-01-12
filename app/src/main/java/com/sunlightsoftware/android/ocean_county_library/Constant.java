@@ -18,5 +18,4 @@ public class Constant {
     //Typeface
     public static final String MONTSERRAT_FONT = "fonts/Montserrat-Regular.ttf";
 
-
 }
