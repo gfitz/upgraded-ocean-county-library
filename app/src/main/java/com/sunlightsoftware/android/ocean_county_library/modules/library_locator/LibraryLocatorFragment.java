@@ -1,10 +1,8 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_locator;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -27,7 +25,6 @@ import com.sunlightsoftware.android.ocean_county_library.components.utils.ImageU
 import com.sunlightsoftware.android.ocean_county_library.models.Library;
 import com.sunlightsoftware.android.ocean_county_library.modules.library_info.LibraryInfoActivity;
 
-import java.io.FileOutputStream;
 import java.util.List;
 
 /**
@@ -75,7 +72,7 @@ public class LibraryLocatorFragment extends Fragment {
 
             mNameTextView = (TextView) itemView.findViewById(R.id.library_list_item_text_view);
             mNameTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),
-                    Constant.MONTSERRAT_FONT));
+                    Constant.MONTSERRAT_FONT_REGULAR));
 
             itemView.setOnClickListener(this);
         }

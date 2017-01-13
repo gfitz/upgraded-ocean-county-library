@@ -76,14 +76,28 @@
         android:background="@color/color_separator"/>
 
 
-    <TextView
-        android:id="@+id/library_info_hours_of_operation_text_view"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="@string/hours_of_operation"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/library_info_hours_of_operation_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/hours_of_operation"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/is_open_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Open now"
+            android:textSize="18sp"
+            android:textAlignment="center"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/sunday_hours_text_view"

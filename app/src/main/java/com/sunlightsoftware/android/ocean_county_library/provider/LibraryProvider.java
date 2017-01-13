@@ -402,6 +402,14 @@ public enum LibraryProvider {
         return hour == null ? "Closed" : hour.toString() + PM;
     }
 
+    public int getOpeningHour(Day day) {
+        return openingHours.get(day);
+    }
+
+    public int getClosingHour(Day day) {
+        return closingHours.get(day);
+    }
+
 
     public enum LibraryBranch {
         TOMS_RIVER_BRANCH, BARNEGAT_BRANCH, BEACHWOOD_BRANCH, BRICK_BRANCH,

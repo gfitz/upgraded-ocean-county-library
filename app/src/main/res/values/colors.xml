@@ -6,4 +6,6 @@
     <color name="color_separator">#D3D3D3</color>
     <color name="white">#FFFFFF</color>
     <color name="button_blue">#2D40F8</color>
+    <color name="open_green">#32CD32</color>
+    <color name="closed_red">#ff0000</color>
 </resources>

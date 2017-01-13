@@ -2,7 +2,6 @@ package com.sunlightsoftware.android.ocean_county_library.modules.home;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -46,7 +45,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         mBannerTextView = (TextView) v.findViewById(R.id.home_banner_text_view);
-        mBannerTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), Constant.MONTSERRAT_FONT));
+        mBannerTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(), Constant.MONTSERRAT_FONT_REGULAR));
 
         mSearchTheCatalogButton = (HomeButton) v.findViewById(R.id.search_the_catalog_button);
         mSearchTheCatalogButton.setImageResource(R.drawable.searchthecatalog);

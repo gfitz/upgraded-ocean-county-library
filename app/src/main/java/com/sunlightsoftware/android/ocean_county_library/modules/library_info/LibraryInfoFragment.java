@@ -2,8 +2,6 @@ package com.sunlightsoftware.android.ocean_county_library.modules.library_info;
 
 import android.graphics.Point;
 import android.graphics.Typeface;
-import android.icu.text.LocaleDisplayNames;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,20 +10,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sunlightsoftware.android.ocean_county_library.Constant;
 import com.sunlightsoftware.android.ocean_county_library.R;
-import com.sunlightsoftware.android.ocean_county_library.components.utils.AsyncDrawable;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.BitmapWorkerTask;
-import com.sunlightsoftware.android.ocean_county_library.components.utils.ImageUtils;
-import com.sunlightsoftware.android.ocean_county_library.models.Library;
 import com.sunlightsoftware.android.ocean_county_library.provider.Day;
 import com.sunlightsoftware.android.ocean_county_library.provider.LibraryProvider;
 
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -41,6 +36,8 @@ public class LibraryInfoFragment extends Fragment {
     private ImageView mLibraryImageView;
     private TextView mCallTextView;
     private TextView mDirectionsTextView;
+    private TextView mHoursOfOperationTextView;
+    private TextView mOpenNowTextView;
     private TextView mSundayHoursTextView;
     private TextView mMondayHoursTextView;
     private TextView mTuesdayHoursTextView;
@@ -99,12 +96,11 @@ public class LibraryInfoFragment extends Fragment {
         }
 
         mCallTextView = (TextView) v.findViewById(R.id.library_info_call_text_view);
-        mCallTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
-                Constant.MONTSERRAT_FONT));
 
         mDirectionsTextView = (TextView) v.findViewById(R.id.library_info_directions_text_view);
-        mDirectionsTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
-                Constant.MONTSERRAT_FONT));
+
+        mOpenNowTextView = (TextView) v.findViewById(R.id.is_open_text_view);
+        mOpenNowTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Constant.MONTSERRAT_FONT_BOLD));
 
         mSundayHoursTextView = (TextView) v.findViewById(R.id.sunday_hours_text_view);
 
@@ -119,6 +115,27 @@ public class LibraryInfoFragment extends Fragment {
         mFridayHoursTextView = (TextView) v.findViewById(R.id.friday_hours_text_view);
 
         mSaturdayTextView = (TextView) v.findViewById(R.id.saturday_hours_text_view);
+
+        mHoursOfOperationTextView = (TextView)
+                v.findViewById(R.id.library_info_hours_of_operation_text_view);
+        mHoursOfOperationTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Constant.MONTSERRAT_FONT_BOLD));
+
+        TextView[] textViews = {
+                mCallTextView,
+                mDirectionsTextView,
+                mSundayHoursTextView,
+                mMondayHoursTextView,
+                mTuesdayHoursTextView,
+                mWednesdayHoursTextView,
+                mThursdayHoursTextView,
+                mFridayHoursTextView,
+                mSaturdayTextView
+        };
+
+        for (TextView view : textViews) {
+            view.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
+                    Constant.MONTSERRAT_FONT_REGULAR));
+        }
 
         String branchName = getArguments().getString(ARG_LIBRARY_NAME).toUpperCase();
         branchName = branchName.replace(" ", "_");
@@ -143,8 +160,8 @@ public class LibraryInfoFragment extends Fragment {
                     library.getClosingHourString(Day.SUNDAY)));
         }
 
-        //FOR EACH DAY IN DAYS, setDayTextView()!
 
+        //Set the textviews
         mMondayHoursTextView.setText(getString(R.string.monday_hours,
                 library.getOpeningHourString(Day.MONDAY),
                 library.getClosingHourString(Day.MONDAY)));
@@ -154,7 +171,8 @@ public class LibraryInfoFragment extends Fragment {
         mWednesdayHoursTextView.setText(getString(R.string.wednesday_hours,
                 library.getOpeningHourString(Day.WEDNESDAY),
                 library.getClosingHourString(Day.WEDNESDAY)));
-        mThursdayHoursTextView.setText(getString(R.string.thursday_hours,
+        mThursdayHoursTextView
+                .setText(getString(R.string.thursday_hours,
                 library.getOpeningHourString(Day.THURSDAY),
                 library.getClosingHourString(Day.THURSDAY)));
         mFridayHoursTextView.setText(getString(R.string.friday_hours,
@@ -163,5 +181,49 @@ public class LibraryInfoFragment extends Fragment {
         mSaturdayTextView.setText(getString(R.string.saturday_hours,
                 library.getOpeningHourString(Day.SATURDAY),
                 library.getClosingHourString(Day.SATURDAY)));
+
+        //Set open now
+        Calendar calendar = Calendar.getInstance();
+        int calendarDay = calendar.get(Calendar.DAY_OF_WEEK);
+
+        int openingHourOnCurrentDay, closingHourOnCurrentDay;
+        HashMap<Integer, Day> calendarToDayMap = new HashMap<>();
+        calendarToDayMap.put(Calendar.SUNDAY, Day.SUNDAY);
+        calendarToDayMap.put(Calendar.MONDAY, Day.MONDAY);
+        calendarToDayMap.put(Calendar.TUESDAY, Day.TUESDAY);
+        calendarToDayMap.put(Calendar.WEDNESDAY, Day.WEDNESDAY);
+        calendarToDayMap.put(Calendar.THURSDAY, Day.THURSDAY);
+        calendarToDayMap.put(Calendar.FRIDAY, Day.FRIDAY);
+        calendarToDayMap.put(Calendar.SATURDAY, Day.SATURDAY);
+
+        openingHourOnCurrentDay = library.getOpeningHour(calendarToDayMap.get(calendarDay));
+        closingHourOnCurrentDay = library.getClosingHour(calendarToDayMap.get(calendarDay));
+
+        int currentTime = calendar.get(Calendar.HOUR_OF_DAY);
+        Log.d(TAG, "Current time =" + currentTime);
+
+        //Convert opening and closing times to 24 hour format
+        openingHourOnCurrentDay = openingHourOnCurrentDay == 1 ? 13 : openingHourOnCurrentDay;
+        closingHourOnCurrentDay += 12;
+
+        if (currentTime >= openingHourOnCurrentDay && currentTime <= closingHourOnCurrentDay) {
+            Log.d(TAG, "Open! Opening hour= " + openingHourOnCurrentDay + ", Closing Hour= "  +
+                    closingHourOnCurrentDay + ", Current time= " + currentTime);
+        } else {
+            Log.d(TAG, "Closed! Opening hour= " + openingHourOnCurrentDay + ", Closing Hour= "  +
+                    closingHourOnCurrentDay + ", Current time= " + currentTime);
+        }
+
+        boolean open = currentTime >= openingHourOnCurrentDay
+                && currentTime <= closingHourOnCurrentDay;
+
+        if (open) {
+            mOpenNowTextView.setText(getString(R.string.open_now));
+            mOpenNowTextView.setTextColor(getContext().getResources().getColor(R.color.open_green));
+        } else {
+            mOpenNowTextView.setText(getString(R.string.closed_now));
+            mOpenNowTextView.setTextColor(getContext().getResources().getColor(R.color.closed_red));
+        }
     }
+
 }

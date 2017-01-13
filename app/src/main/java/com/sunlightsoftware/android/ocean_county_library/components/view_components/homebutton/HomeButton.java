@@ -3,10 +3,8 @@ package com.sunlightsoftware.android.ocean_county_library.components.view_compon
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,7 +42,7 @@ public class HomeButton extends RelativeLayout {
         mHomeButtonIcon = (ImageView) findViewById(R.id.home_button_icon);
         mHomeButtonDescription = (TextView) findViewById(R.id.home_button_description);
         mHomeButtonDescription.setTypeface(Typeface
-                .createFromAsset(getContext().getAssets(), Constant.MONTSERRAT_FONT));
+                .createFromAsset(getContext().getAssets(), Constant.MONTSERRAT_FONT_REGULAR));
         mButton = (Button) findViewById(R.id.home_button);
     }
 

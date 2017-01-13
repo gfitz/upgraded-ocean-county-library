@@ -18,4 +18,6 @@
     <string name="closed">Closed</string>
     <string name="sunday">Sunday</string>
     <string name="closed_on_this_day">%1$s: Closed</string>
+    <string name="open_now">Open Now</string>
+    <string name="closed_now">Closed Now</string>
 </resources>
