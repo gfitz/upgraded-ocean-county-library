@@ -24,6 +24,9 @@
         <activity android:name=".modules.library_locator.LibraryLocatorActivity"
             android:parentActivityName=".modules.home.HomeActivity"/>
 
+        <activity android:name=".modules.library_info.LibraryInfoActivity"
+            android:parentActivityName=".modules.library_locator.LibraryLocatorActivity"/>
+
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_locator;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.sunlightsoftware.android.ocean_county_library.components.utils.AsyncD
 import com.sunlightsoftware.android.ocean_county_library.components.utils.BitmapWorkerTask;
 import com.sunlightsoftware.android.ocean_county_library.components.utils.ImageUtils;
 import com.sunlightsoftware.android.ocean_county_library.models.Library;
+import com.sunlightsoftware.android.ocean_county_library.modules.library_info.LibraryInfoActivity;
 
 import java.util.List;
 
@@ -29,6 +32,7 @@ import java.util.List;
  */
 
 public class LibraryLocatorFragment extends Fragment {
+    private static final String TAG = "LibraryLocatorFragment";
 
     private RecyclerView mLibraryRecyclerView;
     private LibraryManager mLibraryManager;
@@ -54,10 +58,11 @@ public class LibraryLocatorFragment extends Fragment {
         return v;
     }
 
-    private class LibraryHolder extends RecyclerView.ViewHolder {
+    private class LibraryHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView mLibraryImageView;
         private TextView mNameTextView;
+        private Library mLibrary;
 
         public LibraryHolder(LayoutInflater inflater, ViewGroup container) {
             super(inflater.inflate(R.layout.library_list_item, container, false));
@@ -67,12 +72,15 @@ public class LibraryLocatorFragment extends Fragment {
 
             mNameTextView = (TextView) itemView.findViewById(R.id.library_list_item_text_view);
             mNameTextView.setTypeface(Typeface.createFromAsset(getActivity().getAssets(),
-                    Constant.MONTSERRAT_FONT));
+                    Constant.MONTSERRAT_FONT_REGULAR));
+
+            itemView.setOnClickListener(this);
         }
 
         public void bindLibrary(final Library library) {
-            mNameTextView.setText(library.getName());
-            loadBitmap(library.getAssetPath(), mLibraryImageView);
+            mLibrary = library;
+            mNameTextView.setText(mLibrary.getName());
+            loadBitmap(mLibrary.getAssetPath(), mLibraryImageView);
         }
 
         private void loadBitmap(String assetPath, ImageView imageView) {
@@ -109,6 +117,15 @@ public class LibraryLocatorFragment extends Fragment {
         }
 
 
+        @Override
+        public void onClick(View view) {
+            Log.i(TAG, "itemView clicked");
+
+
+            Intent i = LibraryInfoActivity.newIntent(getContext(), mLibrary.getAssetPath(),
+                    mLibrary.getName());
+            startActivity(i);
+        }
     }
 
     private class LibraryAdapter extends RecyclerView.Adapter<LibraryHolder> {

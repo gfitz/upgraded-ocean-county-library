@@ -5,4 +5,19 @@
     <string name="my_account">My Account</string>
     <string name="library_locator">Library Locator</string>
     <string name="select_your_library">Select Your Library</string>
+    <string name="call">Call</string>
+    <string name="directions">Directions</string>
+    <string name="hours_of_operation">Hours of Operation:</string>
+    <string name="sunday_hours">Sunday: %1$s - %2$s</string>
+    <string name="monday_hours">Monday: %1$s - %2$s</string>
+    <string name="tuesday_hours">Tuesday: %1$s - %2$s</string>
+    <string name="wednesday_hours">Wednesday: %1$s - %2$s</string>
+    <string name="thursday_hours">Thursday: %1$s - %2$s</string>
+    <string name="friday_hours">Friday: %1$s- %2$s</string>
+    <string name="saturday_hours">Saturday: %1$s - %2$s</string>
+    <string name="closed">Closed</string>
+    <string name="sunday">Sunday</string>
+    <string name="closed_on_this_day">%1$s: Closed</string>
+    <string name="open_now">Open Now</string>
+    <string name="closed_now">Closed Now</string>
 </resources>

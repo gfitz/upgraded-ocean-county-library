@@ -16,7 +16,7 @@ public class Constant {
             .parse("https://pac.theoceancountylibrary.org/Mobile/MyAccount/Logon");
 
     //Typeface
-    public static final String MONTSERRAT_FONT = "fonts/Montserrat-Regular.ttf";
-
+    public static final String MONTSERRAT_FONT_REGULAR = "fonts/Montserrat-Regular.ttf";
+    public static final String MONTSERRAT_FONT_BOLD = "fonts/Montserrat-Bold.ttf";
 
 }
