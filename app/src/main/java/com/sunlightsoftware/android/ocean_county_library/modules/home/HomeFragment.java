@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.sunlightsoftware.android.ocean_county_library.Constant;
 import com.sunlightsoftware.android.ocean_county_library.R;
@@ -79,11 +81,41 @@ public class HomeFragment extends Fragment {
         mLibraryLocatorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
+                } else {
+                    Intent i = LibraryLocatorActivity.newIntent(getActivity());
+                    startActivity(i);
+                }
+            }
+        });
+
+        initializeInterstitialAd();
+
+        return v;
+    }
+
+    // Initializes the Intersitial Ad
+    private void initializeInterstitialAd() {
+        mInterstitialAd = new InterstitialAd(getContext());
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                requestNewInterstitialAd();
                 Intent i = LibraryLocatorActivity.newIntent(getActivity());
                 startActivity(i);
             }
         });
+    }
 
-        return v;
+    //Loads a brand new ad into mIntersitialAd
+    private void requestNewInterstitialAd() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        mInterstitialAd.loadAd(adRequest);
     }
 }
