@@ -20,4 +20,6 @@
     <string name="closed_on_this_day">%1$s: Closed</string>
     <string name="open_now">Open Now</string>
     <string name="closed_now">Closed Now</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

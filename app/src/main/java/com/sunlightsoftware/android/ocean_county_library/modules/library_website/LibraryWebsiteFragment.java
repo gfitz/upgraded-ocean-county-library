@@ -1,10 +1,12 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_website;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,11 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.sunlightsoftware.android.ocean_county_library.R;
 
 /**
@@ -25,10 +30,13 @@ import com.sunlightsoftware.android.ocean_county_library.R;
  */
 
 public class LibraryWebsiteFragment extends Fragment {
+    private static final String TAG = "LibraryWebsiteFragment";
     private static final String WEBSITE_KEY = "website";
 
     private WebView mWebView;
     private ProgressBar mProgressBar;
+    private AdView mAdView;
+    private Button mClearAdButton;
 
     public static LibraryWebsiteFragment newInstance(Uri website) {
         Bundle args = new Bundle();
@@ -50,6 +58,7 @@ public class LibraryWebsiteFragment extends Fragment {
         mWebView = (WebView)  view.findViewById(R.id.fragment_library_website_web_view);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebChromeClient(new WebChromeClient() {
+
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100)
@@ -65,12 +74,22 @@ public class LibraryWebsiteFragment extends Fragment {
                 AppCompatActivity activity = (AppCompatActivity) getActivity();
                 activity.getSupportActionBar().setSubtitle(title);
             }
+
+
         });
 
         mWebView.setWebViewClient(new WebViewClient() {
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 return false;
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                if (mAdView.getVisibility() != View.VISIBLE)
+                    loadAd();
             }
         });
 
@@ -91,7 +110,29 @@ public class LibraryWebsiteFragment extends Fragment {
         });
 
         mWebView.loadUrl(getArguments().getParcelable(WEBSITE_KEY).toString());
+
+        mAdView = (AdView) view.findViewById(R.id.library_website_ad_view);
+
+        mClearAdButton = (Button) view.findViewById(R.id.library_website_clear_add_button);
+        mClearAdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAdView.setVisibility(View.GONE);
+                mAdView.destroy();
+                mClearAdButton.setVisibility(View.GONE);
+            }
+        });
+
+        loadAd();
+
         return view;
+    }
+
+    private void loadAd() {
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mAdView.setVisibility(View.VISIBLE);
+        mClearAdButton.setVisibility(View.VISIBLE);
     }
 
 

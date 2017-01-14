@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.sunlightsoftware.android.ocean_county_library.Constant;
 import com.sunlightsoftware.android.ocean_county_library.R;
 import com.sunlightsoftware.android.ocean_county_library.components.view_components.homebutton.HomeButton;
@@ -27,6 +28,7 @@ public class HomeFragment extends Fragment {
     private HomeButton mMyAccountButton;
     private HomeButton mLibraryLocatorButton;
     private HomeButton mSearchTheCatalogButton;
+    private InterstitialAd mInterstitialAd;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
