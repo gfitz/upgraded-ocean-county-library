@@ -34,6 +34,9 @@ public enum LibraryProvider {
     private static final String PM = "PM";
     private HashMap<Day, Integer> openingHours;
     private HashMap<Day, Integer> closingHours;
+    private double latitude;
+    private double longitude;
+    private String phoneNumber;
 
     LibraryProvider(LibraryBranch branch) {
         openingHours = new HashMap<>();
@@ -58,6 +61,11 @@ public enum LibraryProvider {
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
 
+                latitude = 39.952568;
+                longitude = -74.195703;
+
+                phoneNumber = "7323496200";
+
                 break;
             case BARNEGAT_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -75,6 +83,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 39.756380;
+                longitude = -74.233042;
+
+                phoneNumber = "6096983331";
+
                 break;
             case BEACHWOOD_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -93,6 +107,11 @@ public enum LibraryProvider {
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 1);
 
+                latitude = 39.942332;
+                longitude = -74.188059;
+
+                phoneNumber = "7322444573";
+
                 break;
             case BRICK_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -110,6 +129,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 40.072600;
+                longitude = -74.147067;
+
+                phoneNumber = "7324774513";
+
                 break;
             case JACKSON_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -127,6 +152,11 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 40.110621;
+                longitude = -74.356152;
+
+                phoneNumber = "7329284400";
 
                 break;
             case LAKEWOOD_BRANCH:
@@ -146,6 +176,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 40.094325;
+                longitude = -74.211845;
+
+                phoneNumber = "7323631335";
+
                 break;
             case LONG_BEACH_ISLAND_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -163,6 +199,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 5);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 39.654029;
+                longitude = -74.174205;
+
+                phoneNumber = "6094942480";
+
                 break;
             case PLUMSTED_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -180,6 +222,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 5);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 1);
+
+                latitude = 40.082020;
+                longitude = -74.531827;
+
+                phoneNumber = "6097587888";
+
                 break;
             case POINT_PLEASANT_BORO_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -197,6 +245,11 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 40.078154;
+                longitude = -74.068446;
+
+                phoneNumber = "7322951555";
 
                 break;
             case TUCKERTON_BRANCH:
@@ -216,6 +269,11 @@ public enum LibraryProvider {
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 1);
 
+                latitude = 39.595940;
+                longitude = -74.337452;
+
+                phoneNumber = "6092961470";
+
                 break;
             case WARETOWN_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -234,6 +292,11 @@ public enum LibraryProvider {
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 1);
 
+                latitude = 39.794545;
+                longitude = -74.191933;
+
+                phoneNumber = "6096935133";
+
                 break;
             case BERKELEY_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -251,6 +314,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 39.899944;
+                longitude = -74.159459;
+
+                phoneNumber = "7322692144";
+
                 break;
             case ISLAND_HEIGHTS_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -268,6 +337,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 5);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 1);
+
+                latitude = 39.944129;
+                longitude = -74.149961;
+
+                phoneNumber = "7322706266";
+
                 break;
             case LACEY_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -285,6 +360,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 39.839613;
+                longitude = -74.190031;
+
+                phoneNumber = "6096938566";
+
                 break;
             case LITTLE_EGG_HARBOR_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -302,6 +383,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 39.586032;
+                longitude = -74.374057;
+
+                phoneNumber = "6092941197";
+
                 break;
             case MANCHESTER_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -319,6 +406,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 40.007870;
+                longitude = -74.295226;
+
+                phoneNumber = "7326577600";
+
                 break;
             case POINT_PLEASANT_BEACH_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -336,6 +429,11 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 5);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 1);
+
+                latitude = 40.093573;
+                longitude = -74.052303;
+
+                phoneNumber = "7328924575";
                 break;
             case STAFFORD_BRANCH:
                 //Only open sept-may on sun
@@ -354,6 +452,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 9);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 39.698725;
+                longitude = -74.256958;
+
+                phoneNumber = "6095973381";
+
                 break;
             case UPPER_SHORES_BRANCH:
                 openingHours.put(Day.SUNDAY, null);
@@ -371,6 +475,12 @@ public enum LibraryProvider {
                 closingHours.put(Day.THURSDAY, 5);
                 closingHours.put(Day.FRIDAY, 5);
                 closingHours.put(Day.SATURDAY, 5);
+
+                latitude = 39.963785;
+                longitude = -74.072154;
+
+                phoneNumber = "7327934942";
+
                 break;
 
             default:
@@ -410,6 +520,17 @@ public enum LibraryProvider {
         return closingHours.get(day);
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
     public enum LibraryBranch {
         TOMS_RIVER_BRANCH, BARNEGAT_BRANCH, BEACHWOOD_BRANCH, BRICK_BRANCH,

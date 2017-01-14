@@ -1,7 +1,9 @@
 package com.sunlightsoftware.android.ocean_county_library.modules.library_info;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -100,7 +102,8 @@ public class LibraryInfoFragment extends Fragment {
         mDirectionsTextView = (TextView) v.findViewById(R.id.library_info_directions_text_view);
 
         mOpenNowTextView = (TextView) v.findViewById(R.id.is_open_text_view);
-        mOpenNowTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Constant.MONTSERRAT_FONT_BOLD));
+        mOpenNowTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
+                Constant.MONTSERRAT_FONT_BOLD));
 
         mSundayHoursTextView = (TextView) v.findViewById(R.id.sunday_hours_text_view);
 
@@ -118,7 +121,8 @@ public class LibraryInfoFragment extends Fragment {
 
         mHoursOfOperationTextView = (TextView)
                 v.findViewById(R.id.library_info_hours_of_operation_text_view);
-        mHoursOfOperationTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(), Constant.MONTSERRAT_FONT_BOLD));
+        mHoursOfOperationTextView.setTypeface(Typeface.createFromAsset(getContext().getAssets(),
+                Constant.MONTSERRAT_FONT_BOLD));
 
         TextView[] textViews = {
                 mCallTextView,
@@ -141,7 +145,33 @@ public class LibraryInfoFragment extends Fragment {
         branchName = branchName.replace(" ", "_");
         branchName = branchName.substring(0, branchName.length() - 1);
 
-        setHoursTextViews(LibraryProvider.valueOf(branchName));
+        final LibraryProvider provider = LibraryProvider.valueOf(branchName);
+        setHoursTextViews(provider);
+
+        mDirectionsTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + provider.getLatitude()
+                        + ", " + provider.getLongitude());
+                Intent navigationIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                navigationIntent.setPackage("com.google.android.apps.maps");
+
+                if (navigationIntent.resolveActivity(getContext().getPackageManager()) != null) {
+                    startActivity(navigationIntent);
+                }
+            }
+        });
+
+        mCallTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri number = Uri.parse("tel:" + provider.getPhoneNumber());
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+
+                if (callIntent.resolveActivity(getContext().getPackageManager()) != null)
+                    startActivity(callIntent);
+            }
+        });
 
         return v;
     }
@@ -205,14 +235,6 @@ public class LibraryInfoFragment extends Fragment {
         //Convert opening and closing times to 24 hour format
         openingHourOnCurrentDay = openingHourOnCurrentDay == 1 ? 13 : openingHourOnCurrentDay;
         closingHourOnCurrentDay += 12;
-
-        if (currentTime >= openingHourOnCurrentDay && currentTime <= closingHourOnCurrentDay) {
-            Log.d(TAG, "Open! Opening hour= " + openingHourOnCurrentDay + ", Closing Hour= "  +
-                    closingHourOnCurrentDay + ", Current time= " + currentTime);
-        } else {
-            Log.d(TAG, "Closed! Opening hour= " + openingHourOnCurrentDay + ", Closing Hour= "  +
-                    closingHourOnCurrentDay + ", Current time= " + currentTime);
-        }
 
         boolean open = currentTime >= openingHourOnCurrentDay
                 && currentTime <= closingHourOnCurrentDay;
