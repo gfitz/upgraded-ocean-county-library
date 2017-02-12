@@ -132,6 +132,8 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        requestNewInterstitialAd();
     }
 
     //Loads a brand new ad into mIntersitialAd
