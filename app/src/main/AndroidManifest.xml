@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.sunlightsoftware.android.ocean_county_library">
+          package="com.sunlightsoftware.android.upgraded_ocean_county_library">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@raw/ocl_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-        <activity android:name=".modules.home.HomeActivity">
+        <activity android:name="com.sunlightsoftware.android.upgraded_ocean_county_library.modules.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -20,14 +20,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".modules.library_website.LibraryWebsiteActivity"
-            android:parentActivityName=".modules.home.HomeActivity"/>
+        <activity android:name="com.sunlightsoftware.android.upgraded_ocean_county_library.modules.library_website.LibraryWebsiteActivity"
+            android:parentActivityName="com.sunlightsoftware.android.upgraded_ocean_county_library.modules.home.HomeActivity"/>
 
-        <activity android:name=".modules.library_locator.LibraryLocatorActivity"
-            android:parentActivityName=".modules.home.HomeActivity"/>
+        <activity android:name="com.sunlightsoftware.android.upgraded_ocean_county_library.modules.library_locator.LibraryLocatorActivity"
+            android:parentActivityName="com.sunlightsoftware.android.upgraded_ocean_county_library.modules.home.HomeActivity"/>
 
-        <activity android:name=".modules.library_info.LibraryInfoActivity"
-            android:parentActivityName=".modules.library_locator.LibraryLocatorActivity"/>
+        <activity android:name="com.sunlightsoftware.android.upgraded_ocean_county_library.modules.library_info.LibraryInfoActivity"
+            android:parentActivityName="com.sunlightsoftware.android.upgraded_ocean_county_library.modules.library_locator.LibraryLocatorActivity"/>
 
         <activity android:name="com.google.android.gms.ads.AdActivity"
                   android:theme="@android:style/Theme.Translucent" />
