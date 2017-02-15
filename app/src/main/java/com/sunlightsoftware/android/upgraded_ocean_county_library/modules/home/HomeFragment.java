@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,6 @@ public class HomeFragment extends Fragment {
     private HomeButton mMyAccountButton;
     private HomeButton mLibraryLocatorButton;
     private HomeButton mSearchTheCatalogButton;
-    private InterstitialAd mInterstitialAd;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -92,74 +92,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (mInterstitialAd.isLoaded()) {
-                    mInterstitialAd.show();
-                } else {
-                    Intent i = LibraryLocatorActivity.newIntent(getActivity());
-                    startActivity(i);
-                }
+                Intent i = LibraryLocatorActivity.newIntent(getActivity());
+                startActivity(i);
+
             }
         });
-
-        initializeInterstitialAd();
 
         return v;
     }
-
-    // Initializes the Intersitial Ad
-    private void initializeInterstitialAd() {
-        mInterstitialAd = new InterstitialAd(getContext());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                requestNewInterstitialAd();
-                Intent i = LibraryLocatorActivity.newIntent(getActivity());
-                startActivity(i);
-            }
-        });
-
-        requestNewInterstitialAd();
-    }
-
-    //Loads a brand new ad into mIntersitialAd
-    private void requestNewInterstitialAd() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
-        mInterstitialAd.loadAd(adRequest);
-    }
-
-    class LoadBannerImageTask extends AsyncTask<Integer, Void, Bitmap> {
-        private final WeakReference<ImageView> imageViewWeakReference;
-        private int data = 0;
-        private int reqWidth;
-        private int reqHeight;
-
-        public LoadBannerImageTask(ImageView imageView, int reqWidth, int reqHeight) {
-            imageViewWeakReference = new WeakReference<ImageView>(imageView);
-            this.reqWidth = reqWidth;
-            this.reqHeight = reqHeight;
-        }
-
-        @Override
-        protected Bitmap doInBackground(Integer... integers) {
-            data = integers[0];
-            return ImageUtils.decodeSampledBitmapFromResource(getResources(), data,
-                    reqWidth, reqHeight);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            if (imageViewWeakReference != null && bitmap != null) {
-                final ImageView imageView = imageViewWeakReference.get();
-                if (imageView != null)
-                    imageView.setImageBitmap(bitmap);
-            }
-
-        }
-    }
-
 
 }

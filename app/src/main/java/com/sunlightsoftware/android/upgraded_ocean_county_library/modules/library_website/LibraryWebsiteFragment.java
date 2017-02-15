@@ -3,6 +3,7 @@ package com.sunlightsoftware.android.upgraded_ocean_county_library.modules.libra
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.sunlightsoftware.android.upgraded_ocean_county_library.R;
 
 /**
@@ -128,7 +130,10 @@ public class LibraryWebsiteFragment extends Fragment {
     }
 
     private void loadAd() {
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice(Settings.Secure.getString(getContext().getContentResolver(),
+                        Settings.Secure.ANDROID_ID)).build();
         mAdView.loadAd(adRequest);
         mAdView.setVisibility(View.VISIBLE);
         mClearAdButton.setVisibility(View.VISIBLE);
