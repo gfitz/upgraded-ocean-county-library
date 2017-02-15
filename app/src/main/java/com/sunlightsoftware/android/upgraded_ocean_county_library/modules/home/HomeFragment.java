@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -92,7 +93,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (mInterstitialAd.isLoaded()) {
+                boolean loaded = mInterstitialAd.isLoaded();
+                if (loaded) {
                     mInterstitialAd.show();
                 } else {
                     Intent i = LibraryLocatorActivity.newIntent(getActivity());
@@ -109,7 +111,7 @@ public class HomeFragment extends Fragment {
     // Initializes the Intersitial Ad
     private void initializeInterstitialAd() {
         mInterstitialAd = new InterstitialAd(getContext());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-7195172863816354/7807319023");
 
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
@@ -127,6 +129,8 @@ public class HomeFragment extends Fragment {
     private void requestNewInterstitialAd() {
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .addTestDevice(Settings.Secure.getString(getContext().getContentResolver(),
+                        Settings.Secure.ANDROID_ID))
                 .build();
         mInterstitialAd.loadAd(adRequest);
     }
