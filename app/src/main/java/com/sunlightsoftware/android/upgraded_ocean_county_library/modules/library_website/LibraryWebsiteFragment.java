@@ -130,10 +130,7 @@ public class LibraryWebsiteFragment extends Fragment {
     }
 
     private void loadAd() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(Settings.Secure.getString(getContext().getContentResolver(),
-                        Settings.Secure.ANDROID_ID)).build();
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         mAdView.setVisibility(View.VISIBLE);
         mClearAdButton.setVisibility(View.VISIBLE);
